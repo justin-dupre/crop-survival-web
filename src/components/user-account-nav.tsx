@@ -1,7 +1,6 @@
 "use client"
 
-import Link from "next/link"
-import { User } from "next-auth"
+import { type User } from "next-auth"
 import { signOut } from "next-auth/react"
 
 import {
@@ -22,7 +21,7 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <UserAvatar
-          user={{ name: user.name || null, image: user.image || null }}
+          user={{ name: user.name ?? null, image: user.image ?? null }}
           className="h-8 w-8"
         />
       </DropdownMenuTrigger>
@@ -37,7 +36,7 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
             )}
           </div>
         </div>
-        <DropdownMenuSeparator />
+        {/* <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/dashboard">Dashboard</Link>
         </DropdownMenuItem>
@@ -46,13 +45,13 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href="/dashboard/settings">Settings</Link>
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="cursor-pointer"
-          onSelect={(event) => {
+          onSelect={async (event) => {
             event.preventDefault()
-            signOut({
+            await signOut({
               callbackUrl: `${window.location.origin}`,
             })
           }}

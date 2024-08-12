@@ -11,7 +11,6 @@ import { ThemeProvider } from "~/components/theme-provider";
 import { MainNav } from "~/components/nav";
 import { UserAccountNav } from "~/components/user-account-nav";
 import { getCurrentUser } from "~/lib/session";
-import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Toaster } from "~/components/ui/toaster";
 
@@ -30,7 +29,6 @@ export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const user = await getCurrentUser();
-  console.log(user);
 
   return (
     <html lang="en" className={`${GeistSans.variable}`}>

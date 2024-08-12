@@ -1,15 +1,13 @@
 "use client";
-import { useState, useMemo } from "react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselApi,
   CarouselPrevious,
   CarouselNext,
 } from "./ui/carousel";
-import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
+import Image from "next/image";
 
 export type IImage = {
   url: string;
@@ -30,10 +28,10 @@ const Gallery = ({ images }: GalleryProps) => {
       ]}
     >
       <CarouselContent>
-        {images.map((image) => (
-          <CarouselItem>
+        {images.map((image, index) => (
+          <CarouselItem key={`${image.url}-${index}`}>
             <div className="flex items-center justify-center p-1">
-              <img
+              <Image
                 src={image.url}
                 alt="Image"
                 width={0}

@@ -1,22 +1,12 @@
 import Link from "next/link";
 
-import { getServerAuthSession } from "~/server/auth";
-import { api, HydrateClient } from "~/trpc/server";
-import Image from "next/image";
+import { HydrateClient } from "~/trpc/server";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-import { Input } from "~/components/ui/input";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "~/components/ui/carousel";
+
+
 import Gallery from "~/components/gallery";
 
 export default async function Home() {
-  // void api.feedback.getLatest.prefetch();
 
   return (
     <HydrateClient>
@@ -27,9 +17,11 @@ export default async function Home() {
           </h1>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
             <Link
-              href="https://create.t3.gg/en/usage/first-steps"
-              target="_blank"
+              href='https://www.dropbox.com/s/mn4um4li2akjqcr/CropSurvival.exe?dl=1'
+              target='_blank'
+              rel='noopener noreferrer'
               className="flex max-w-xs flex-col gap-4 rounded-xl p-4"
+              download
             >
               <Card>
                 <CardHeader>

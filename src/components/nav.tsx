@@ -4,17 +4,10 @@ import * as React from "react";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 
-// import { MainNavItem } from "types"
 import { cn } from "~/lib/utils";
 import { Icons } from "~/components/icons";
-// import { MobileNav } from "@/components/mobile-nav"
 
-interface MainNavProps {
-  items?: any[];
-  children?: React.ReactNode;
-}
-
-export function MainNav({ children }: MainNavProps) {
+export function MainNav() {
   const segment = useSelectedLayoutSegment();
   console.log("Segment is : ", segment);
 
@@ -56,9 +49,6 @@ export function MainNav({ children }: MainNavProps) {
           ))}
         </nav>
       ) : null}
-      {/* {showMobileMenu && items && (
-        <MobileNav items={items}>{children}</MobileNav>
-      )} */}
     </div>
   );
 }
