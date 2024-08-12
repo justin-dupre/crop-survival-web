@@ -10,9 +10,9 @@ import { TRPCReactProvider } from "~/trpc/react";
 import { ThemeProvider } from "~/components/theme-provider";
 import { MainNav } from "~/components/nav";
 import { UserAccountNav } from "~/components/user-account-nav";
-import { getCurrentUser } from "~/lib/session";
 import Link from "next/link";
 import { Toaster } from "~/components/ui/toaster";
+import { getServerAuthSession } from "~/server/auth";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const user = await getCurrentUser();
+  const session = await getServerAuthSession();  
 
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
@@ -46,13 +46,13 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <div className="container flex h-16 items-center justify-between py-4">
-              <MainNav />
-              {user ? (
+              <MainNav session={session} />
+              {session ? (
                 <UserAccountNav
                   user={{
-                    name: user.name,
-                    image: user.image,
-                    email: user.email,
+                    name: session?.user?.name,
+                    image: session?.user.image,
+                    email: session?.user.email,
                   }}
                 />
               ) : (

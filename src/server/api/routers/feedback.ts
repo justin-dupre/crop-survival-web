@@ -16,7 +16,6 @@ export const feedbackRouter = createTRPCRouter({
       });
     }),
 
-
   getLatest: publicProcedure.query(async ({ ctx }) => {
     const latestFeedback = await ctx.db.feedback.findFirst({
       orderBy: { createdAt: "desc" },
@@ -24,7 +23,10 @@ export const feedbackRouter = createTRPCRouter({
     return latestFeedback;
   }),
 
-  // getSecretMessage: protectedProcedure.query(() => {
-  //   return "you can now see this secret message!";
-  // }),
+  getAllFeedback: publicProcedure.query(async ({ ctx }) => {
+    const feedback = await ctx.db.feedback.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+    return feedback;
+  }),
 });
