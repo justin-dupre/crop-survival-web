@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 import { getCurrentUser } from "~/lib/session";
 import { HydrateClient, api } from "~/trpc/server";
@@ -12,6 +12,7 @@ import {
   TableBody,
   TableCell,
 } from "~/components/ui/table";
+import FeedbackDialog from "~/components/all-feedback-dialog";
 
 export default async function AllFeedbackPage() {
   const user = await getCurrentUser();
@@ -23,7 +24,7 @@ export default async function AllFeedbackPage() {
 
   return (
     <HydrateClient>
-
+      <div className="max-w-[1920px] items-center justify-center p-8 m-auto">
         <Table>
           <TableCaption>Hopefully the feedback is good.</TableCaption>
           <TableHeader>
@@ -35,18 +36,19 @@ export default async function AllFeedbackPage() {
           </TableHeader>
           <TableBody>
             {feedback.map((fb) => (
-              <TableRow key={fb.id}>
-                <TableCell className="font-medium">
-                  {fb.id}
-                </TableCell>
-                <TableCell className="font-medium">
-                  {fb.createdAt.toLocaleDateString('en-US')}
-                </TableCell>
-                <TableCell>{fb.feedback}</TableCell>
-              </TableRow>
+              <FeedbackDialog key={fb.id} feedback={fb}>
+                <TableRow className="cursor-pointer">
+                  <TableCell className="font-medium">{fb.id}</TableCell>
+                  <TableCell className="font-medium">
+                    {fb.createdAt.toLocaleDateString("en-US")}
+                  </TableCell>
+                  <TableCell>{fb.feedback}</TableCell>
+                </TableRow>
+              </FeedbackDialog>
             ))}
           </TableBody>
         </Table>
+      </div>
     </HydrateClient>
   );
 }
